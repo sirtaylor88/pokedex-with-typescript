@@ -1,31 +1,22 @@
-import { createInterface } from 'node:readline';
-import { stdin, stdout } from 'node:process';
-import { getCommands } from './commands.js';
-
-const rl = createInterface({
-    input: stdin,
-    output: stdout,
-    prompt: 'Pokedex > '
-});
+import { State } from './state.js';
 
 export function cleanInput(input: string): string[] {
     return input.toLowerCase().trim().split(" ").filter((word) => word != "");
 }
 
-export function startREPL(): void {
-    const availableCommands = getCommands();
-    rl.prompt();
-    rl.on('line', (input) => {
+export function startREPL(state: State): void {
+    state.rl.prompt();
+    state.rl.on('line', (input) => {
         const words = cleanInput(input);
         if (!words.length) {
-            rl.prompt();
+            state.rl.prompt();
         }
         const selectedCommand = words[0];
-        if (selectedCommand in availableCommands) {
-            availableCommands[selectedCommand].callback(availableCommands);
+        if (selectedCommand in state.commands) {
+            state.commands[selectedCommand].callback(state);
         } else {
             console.log('Unknown command');
         }
-        rl.prompt();
+        state.rl.prompt();
     });
 }
