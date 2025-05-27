@@ -13,12 +13,15 @@ export type Location = {
 };
 
 export type PokemonEncounter = {
-    pokemon: Pokemon;
+    pokemon: {
+        name: string;
+        url: string;
+    };
 };
 
 export type Pokemon = {
     name: string;
-    url: string;
+    base_experience: number;
 };
 
 const cache = new Cache(1000);
@@ -59,6 +62,22 @@ export class PokeAPI {
 
         const response_json = await response.json();
         cache.add(locationName, response_json);
+        return response_json;
+    }
+
+    async fetchPokemon(pokemonName: string): Promise<Pokemon> {
+        const response = await fetch(`${PokeAPI.baseURL}/pokemon/${pokemonName}`);
+        const cached: Pokemon | undefined = cache.get(pokemonName);
+        if (cached) {
+            return cached;
+        }
+
+        if (!response.ok) {
+            throw new Error(`Response status: ${response.status}`);
+        }
+
+        const response_json = await response.json();
+        cache.add(pokemonName, response_json);
         return response_json;
     }
 }
