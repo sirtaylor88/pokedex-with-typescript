@@ -12,8 +12,12 @@ export function startREPL(state: State): void {
             state.rl.prompt();
         }
         const selectedCommand = words[0];
+        let args: string[] = [];
+        if (words.length > 1) {
+            args = words.slice(1);
+        }
         if (selectedCommand in state.commands) {
-            state.commands[selectedCommand].callback(state);
+            state.commands[selectedCommand].callback(state, ...args);
         } else {
             console.log('Unknown command');
         }
