@@ -1,4 +1,4 @@
-import { Cache } from "./pokecache.js";
+import { Cache } from "../cache/pokecache.js";
 
 export type ShallowLocations = {
     count: number;

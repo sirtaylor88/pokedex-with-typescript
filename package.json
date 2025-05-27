@@ -6,7 +6,7 @@
     "test": "vitest --run",
     "build": "npx tsc",
     "start": "node dist/main.js",
-    "dev": "npx tsc && node dist/main.js"
+    "dev": "rm -rf dist && npx tsc && node dist/main.js"
   },
   "repository": {
     "type": "git",

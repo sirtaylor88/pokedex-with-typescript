@@ -1,4 +1,4 @@
-import { State } from "./state.js";
+import { State } from "../state.js";
 
 export async function commandExplore(state: State, locationName: string) {
     const response_data = await state.api.fetchLocation(locationName);

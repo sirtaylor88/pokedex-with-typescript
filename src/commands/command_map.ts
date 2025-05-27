@@ -1,4 +1,4 @@
-import { State } from "./state.js";
+import { State } from "../state.js";
 
 async function fetchLocations(state: State, pageURL?: string) {
     const response_data = await state.api.fetchLocations(pageURL);
