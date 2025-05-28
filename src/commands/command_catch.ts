@@ -1,7 +1,7 @@
 import { State } from "../state.js";
 
 export async function commandCatch(state: State, pokemonName: string) {
-    console.log(`Throwing a Pokeball at ${pokemonName}...`)
+    console.log(`Throwing a Pokeball at ${pokemonName}...`);
     const response_data = await state.api.fetchPokemon(pokemonName);
     if (state.xp > response_data.base_experience) {
         console.log(`${pokemonName} was caught!`);
