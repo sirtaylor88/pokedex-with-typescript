@@ -22,7 +22,24 @@ export type PokemonEncounter = {
 export type Pokemon = {
     name: string;
     base_experience: number;
+    height: number;
+    weight: number;
+    stats: Stat[];
+    types: Type[];
 };
+
+export type Stat = {
+    base_stat: number;
+    stat: {
+        name: string;
+    }
+}
+
+export type Type = {
+    type: {
+        name: string;
+    }
+}
 
 const cache = new Cache(1000);
 export class PokeAPI {
