@@ -6,6 +6,7 @@ export async function commandCatch(state: State, pokemonName: string) {
     if (state.xp > response_data.base_experience) {
         console.log(`${pokemonName} was caught!`);
         state.pokedex[pokemonName] = response_data;
+        console.log('You may now inspect it with the inspect command.');
     } else {
         console.log(`${pokemonName} excaped!`);
         state.xp += Math.floor(Math.random() * 50);
